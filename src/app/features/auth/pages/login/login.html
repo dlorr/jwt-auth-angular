@@ -1,3 +1,46 @@
-<div class="min-h-screen flex items-center justify-center">
-  <h1 class="text-3xl font-bold">Login Page</h1>
+<div class="min-h-screen flex items-center justify-center bg-slate-100 p-4">
+  <app-card class="w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-6">Login</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- EMAIL -->
+      <div>
+        <label class="block mb-1 text-sm font-medium">Email</label>
+
+        <input type="email" formControlName="email" class="w-full rounded border px-3 py-2" />
+
+        @if ((form.controls.email.touched || submitted) && form.controls.email.errors) {
+          <app-error-message
+            [message]="
+              form.controls.email.errors['required']
+                ? 'Email is required'
+                : form.controls.email.errors['emailMinLength']
+                  ? form.controls.email.errors['emailMinLength']
+                  : form.controls.email.errors['emailMaxLength']
+                    ? form.controls.email.errors['emailMaxLength']
+                    : form.controls.email.errors['invalidEmail']
+            "
+          />
+        }
+      </div>
+
+      <!-- PASSWORD -->
+      <div>
+        <label class="block mb-1 text-sm font-medium">Password</label>
+
+        <input type="password" formControlName="password" class="w-full rounded border px-3 py-2" />
+
+        @if ((form.controls.password.touched || submitted) && form.controls.password.errors) {
+          <app-error-message [message]="'Invalid password'" />
+        }
+      </div>
+
+      <app-button type="submit" class="w-full">Login</app-button>
+
+      <div class="text-center text-sm">
+        Don't have an account?
+        <a routerLink="/register" class="text-blue-600 hover:underline">Register</a>
+      </div>
+    </form>
+  </app-card>
 </div>
