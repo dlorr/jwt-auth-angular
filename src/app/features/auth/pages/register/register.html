@@ -1,3 +1,58 @@
-<div class="min-h-screen flex items-center justify-center">
-  <h1 class="text-3xl font-bold">Register Page</h1>
+<div class="min-h-screen flex items-center justify-center bg-slate-100 p-4">
+  <app-card class="w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-6">Register</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- EMAIL -->
+      <div>
+        <label>Email</label>
+        <input type="email" formControlName="email" class="w-full rounded border px-3 py-2" />
+
+        @if ((form.controls.email.touched || submitted) && form.controls.email.errors) {
+          <app-error-message [message]="'Invalid email'" />
+        }
+      </div>
+
+      <!-- PASSWORD -->
+      <div>
+        <label>Password</label>
+        <input type="password" formControlName="password" class="w-full rounded border px-3 py-2" />
+
+        @if ((form.controls.password.touched || submitted) && form.controls.password.errors) {
+          <app-error-message
+            [message]="
+              form.controls.password.errors['required']
+                ? 'Password is required'
+                : form.controls.password.errors['passwordMinLength']
+                  ? form.controls.password.errors['passwordMinLength']
+                  : form.controls.password.errors['passwordNumber']
+                    ? form.controls.password.errors['passwordNumber']
+                    : form.controls.password.errors['passwordUppercase']
+            "
+          />
+        }
+      </div>
+
+      <!-- CONFIRM PASSWORD -->
+      <div>
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          class="w-full rounded border px-3 py-2"
+        />
+      </div>
+
+      @if ((submitted || form.touched) && form.hasError('passwordMismatch')) {
+        <app-error-message [message]="'Passwords do not match'" />
+      }
+
+      <app-button type="submit">Create Account</app-button>
+
+      <div class="text-center text-sm">
+        Already have an account?
+        <a routerLink="/login" class="text-blue-600 hover:underline">Login</a>
+      </div>
+    </form>
+  </app-card>
 </div>
