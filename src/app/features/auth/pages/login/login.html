@@ -35,7 +35,10 @@
         }
       </div>
 
-      <app-button type="submit" class="w-full">Login</app-button>
+      @if (serverError()) {
+        <app-error-message [message]="serverError()" />
+      }
+      <app-button type="submit" [loading]="loading()"> Login </app-button>
 
       <div class="text-center text-sm">
         Don't have an account?

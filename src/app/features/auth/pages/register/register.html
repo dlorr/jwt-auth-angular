@@ -41,13 +41,19 @@
           formControlName="confirmPassword"
           class="w-full rounded border px-3 py-2"
         />
+
+        @if (
+          (form.controls.confirmPassword.touched || submitted) && form.hasError('passwordMismatch')
+        ) {
+          <app-error-message [message]="'Passwords do not match'" />
+        }
       </div>
 
-      @if ((submitted || form.touched) && form.hasError('passwordMismatch')) {
-        <app-error-message [message]="'Passwords do not match'" />
+      @if (serverError()) {
+        <app-error-message [message]="serverError()" />
       }
 
-      <app-button type="submit">Create Account</app-button>
+      <app-button type="submit" [loading]="loading()"> Create Account </app-button>
 
       <div class="text-center text-sm">
         Already have an account?
