@@ -24,9 +24,6 @@ export class AuthService {
     return this.http.post<LoginResponse>(
       `${environment.apiUrl}${API_ENDPOINTS.AUTH.LOGIN}`,
       payload,
-      {
-        withCredentials: true,
-      },
     );
   }
 
@@ -34,27 +31,18 @@ export class AuthService {
     return this.http.post<RegisterResponse>(
       `${environment.apiUrl}${API_ENDPOINTS.AUTH.REGISTER}`,
       payload,
-      {
-        withCredentials: true,
-      },
     );
   }
 
   logout() {
-    return this.http.get<MessageResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.LOGOUT}`, {
-      withCredentials: true,
-    });
+    return this.http.get<MessageResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.LOGOUT}`);
   }
 
   getCurrentUser() {
-    return this.http.get<User>(`${environment.apiUrl}${API_ENDPOINTS.USER.PROFILE}`, {
-      withCredentials: true,
-    });
+    return this.http.get<User>(`${environment.apiUrl}${API_ENDPOINTS.USER.PROFILE}`);
   }
 
   refresh() {
-    return this.http.get<MessageResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.REFRESH}`, {
-      withCredentials: true,
-    });
+    return this.http.get<MessageResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.REFRESH}`);
   }
 }
