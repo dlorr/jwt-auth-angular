@@ -10,17 +10,7 @@
         <input type="email" formControlName="email" class="w-full rounded border px-3 py-2" />
 
         @if ((form.controls.email.touched || submitted) && form.controls.email.errors) {
-          <app-error-message
-            [message]="
-              form.controls.email.errors['required']
-                ? 'Email is required'
-                : form.controls.email.errors['emailMinLength']
-                  ? form.controls.email.errors['emailMinLength']
-                  : form.controls.email.errors['emailMaxLength']
-                    ? form.controls.email.errors['emailMaxLength']
-                    : form.controls.email.errors['invalidEmail']
-            "
-          />
+          <app-error-message [message]="getErrorMessage(form.controls.email)" />
         }
       </div>
 
@@ -31,7 +21,7 @@
         <input type="password" formControlName="password" class="w-full rounded border px-3 py-2" />
 
         @if ((form.controls.password.touched || submitted) && form.controls.password.errors) {
-          <app-error-message [message]="'Invalid password'" />
+          <app-error-message [message]="getErrorMessage(form.controls.password)" />
         }
       </div>
 

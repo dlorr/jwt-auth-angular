@@ -13,6 +13,7 @@ import { ErrorMessage } from '../../../../shared/components/feedback/error-messa
 
 import { emailValidator } from '../../../../shared/validators/email.validator';
 import { passwordValidator } from '../../../../shared/validators/password.validator';
+import { getFormErrorMessage } from '../../../../shared/utils/form-error.util';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ export class Login {
   submitted = false;
   loading = signal(false);
   serverError = signal('');
+  getErrorMessage = getFormErrorMessage;
 
   form = this.fb.nonNullable.group({
     email: ['', [emailValidator]],

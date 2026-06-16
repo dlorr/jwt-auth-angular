@@ -14,6 +14,7 @@ import { ErrorMessage } from '../../../../shared/components/feedback/error-messa
 import { emailValidator } from '../../../../shared/validators/email.validator';
 import { passwordValidator } from '../../../../shared/validators/password.validator';
 import { confirmPasswordValidator } from '../../../../shared/validators/confirm-password.validator';
+import { getFormErrorMessage } from '../../../../shared/utils/form-error.util';
 
 @Component({
   selector: 'app-register',
@@ -30,6 +31,7 @@ export class Register {
   submitted = false;
   loading = signal(false);
   serverError = signal('');
+  getErrorMessage = getFormErrorMessage;
 
   form = this.fb.nonNullable.group(
     {
