@@ -25,6 +25,12 @@
         }
       </div>
 
+      <div class="text-right text-sm">
+        <a routerLink="/forgot-password" class="text-blue-600 hover:underline">
+          Forgot password?
+        </a>
+      </div>
+
       @if (serverError()) {
         <app-error-message [message]="serverError()" />
       }

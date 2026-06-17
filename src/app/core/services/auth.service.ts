@@ -8,6 +8,8 @@ import {
   LoginResponse,
   RegisterRequest,
   RegisterResponse,
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
 } from '../models/auth.model';
 
 import { User } from '../models/user.model';
@@ -44,5 +46,19 @@ export class AuthService {
 
   refresh() {
     return this.http.get<MessageResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.REFRESH}`);
+  }
+
+  forgotPassword(payload: ForgotPasswordRequest) {
+    return this.http.post<MessageResponse>(
+      `${environment.apiUrl}${API_ENDPOINTS.AUTH.FORGOT_PASSWORD}`,
+      payload,
+    );
+  }
+
+  resetPassword(payload: ResetPasswordRequest) {
+    return this.http.post<MessageResponse>(
+      `${environment.apiUrl}${API_ENDPOINTS.AUTH.RESET_PASSWORD}`,
+      payload,
+    );
   }
 }
