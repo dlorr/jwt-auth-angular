@@ -61,4 +61,8 @@ export class AuthService {
       payload,
     );
   }
+
+  verifyEmail(code: string) {
+    return this.http.get<MessageResponse>(`${environment.apiUrl}/auth/email/verify/${code}`);
+  }
 }
