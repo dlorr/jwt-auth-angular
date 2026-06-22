@@ -65,4 +65,11 @@ export class AuthService {
   verifyEmail(code: string) {
     return this.http.get<MessageResponse>(`${environment.apiUrl}/auth/email/verify/${code}`);
   }
+
+  resendVerificationEmail() {
+    return this.http.post<MessageResponse>(
+      `${environment.apiUrl}${API_ENDPOINTS.USER.RESEND_VERIFICATION}`,
+      {},
+    );
+  }
 }
