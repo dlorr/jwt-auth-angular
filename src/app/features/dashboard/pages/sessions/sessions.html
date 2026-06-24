@@ -1,0 +1,60 @@
+<div class="min-h-screen bg-slate-100 p-6">
+  <div class="mx-auto max-w-4xl rounded-xl bg-white p-6 shadow-sm">
+    <div class="mb-6 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold">Sessions</h1>
+        <p class="text-sm text-gray-600">Manage active login sessions.</p>
+      </div>
+
+      <a routerLink="/dashboard" class="text-sm text-blue-600 hover:underline">
+        Back to Dashboard
+      </a>
+    </div>
+
+    @if (loading()) {
+      <p class="text-sm text-gray-600">Loading sessions...</p>
+    }
+
+    @if (errorMessage()) {
+      <p class="text-sm text-red-600">{{ errorMessage() }}</p>
+    }
+
+    @if (successMessage()) {
+      <p class="text-sm text-green-600">{{ successMessage() }}</p>
+    }
+
+    <div class="mt-4 space-y-3">
+      @for (session of sessions(); track session._id) {
+        <div class="rounded-lg border border-gray-200 p-4">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="font-medium">
+                {{ session.userAgent || 'Unknown device' }}
+              </p>
+
+              <p class="text-sm text-gray-600">Created: {{ session.createdAt }}</p>
+
+              @if (session.isCurrent) {
+                <p class="mt-1 text-sm font-medium text-green-600">Current session</p>
+              }
+            </div>
+
+            @if (!session.isCurrent) {
+              <button
+                type="button"
+                (click)="deleteSession(session._id)"
+                class="rounded-lg border border-red-200 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+              >
+                Revoke
+              </button>
+            }
+          </div>
+        </div>
+      } @empty {
+        @if (!loading()) {
+          <p class="text-sm text-gray-600">No active sessions found.</p>
+        }
+      }
+    </div>
+  </div>
+</div>

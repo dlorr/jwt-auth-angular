@@ -8,6 +8,10 @@
           <p class="mt-2 text-sm text-gray-600">Logged in as {{ user()?.email }}</p>
 
           <p class="text-sm text-gray-600">Verified: {{ user()?.verified ? 'Yes' : 'No' }}</p>
+
+          <a routerLink="/sessions" class="mt-2 inline-block text-sm text-blue-600 hover:underline">
+            Manage Sessions
+          </a>
         }
       </div>
 

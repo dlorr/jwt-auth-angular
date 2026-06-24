@@ -15,6 +15,7 @@ import {
 import { User } from '../models/user.model';
 
 import { MessageResponse } from '../models/api.model';
+import { SessionsResponse } from '../models/session.model';
 
 @Injectable({
   providedIn: 'root',
@@ -70,6 +71,16 @@ export class AuthService {
     return this.http.post<MessageResponse>(
       `${environment.apiUrl}${API_ENDPOINTS.USER.RESEND_VERIFICATION}`,
       {},
+    );
+  }
+
+  getSessions() {
+    return this.http.get<SessionsResponse>(`${environment.apiUrl}${API_ENDPOINTS.SESSION.LIST}`);
+  }
+
+  deleteSession(id: string) {
+    return this.http.delete<MessageResponse>(
+      `${environment.apiUrl}${API_ENDPOINTS.SESSION.DELETE(id)}`,
     );
   }
 }

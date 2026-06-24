@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '../../../../core/services/auth.service';
@@ -8,7 +8,7 @@ import { ApiError } from '../../../../core/models/api.model';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

@@ -49,6 +49,13 @@ export const routes: Routes = [
   },
 
   {
+    path: 'sessions',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/dashboard/pages/sessions/sessions').then((m) => m.Sessions),
+  },
+
+  {
     path: '**',
     redirectTo: 'login',
   },

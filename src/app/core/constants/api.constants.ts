@@ -16,5 +16,6 @@ export const API_ENDPOINTS = {
 
   SESSION: {
     LIST: '/session/sessions',
+    DELETE: (id: string) => `/session/${id}`,
   },
 } as const;
