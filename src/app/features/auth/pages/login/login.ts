@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -12,7 +12,6 @@ import { Button } from '../../../../shared/components/ui/button/button';
 import { ErrorMessage } from '../../../../shared/components/feedback/error-message/error-message';
 
 import { emailValidator } from '../../../../shared/validators/email.validator';
-import { passwordValidator } from '../../../../shared/validators/password.validator';
 import { getFormErrorMessage } from '../../../../shared/utils/form-error.util';
 
 @Component({
@@ -34,7 +33,7 @@ export class Login {
 
   form = this.fb.nonNullable.group({
     email: ['', [emailValidator]],
-    password: ['', [passwordValidator]],
+    password: ['', [Validators.required]],
   });
 
   onSubmit() {

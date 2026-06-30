@@ -1,14 +1,19 @@
 <div class="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
   <app-card class="w-full max-w-md">
-    <h1 class="text-2xl font-bold mb-6">Register</h1>
+    <div class="mb-6 text-center">
+      <h1 class="text-2xl font-bold tracking-tight text-slate-950">Create account</h1>
+      <p class="mt-2 text-sm text-slate-600">Start your secure session-based auth experience.</p>
+    </div>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
-      <!-- EMAIL -->
       <div>
-        <label>Email</label>
+        <label class="mb-1.5 block text-sm font-medium text-slate-700">Email</label>
+
         <input
           type="email"
           formControlName="email"
+          autocomplete="email"
+          placeholder="you@example.com"
           class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
         />
 
@@ -17,12 +22,14 @@
         }
       </div>
 
-      <!-- PASSWORD -->
       <div>
-        <label>Password</label>
+        <label class="mb-1.5 block text-sm font-medium text-slate-700">Password</label>
+
         <input
           type="password"
           formControlName="password"
+          autocomplete="new-password"
+          placeholder="Create a strong password"
           class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
         />
 
@@ -31,12 +38,14 @@
         }
       </div>
 
-      <!-- CONFIRM PASSWORD -->
       <div>
-        <label>Confirm Password</label>
+        <label class="mb-1.5 block text-sm font-medium text-slate-700"> Confirm Password </label>
+
         <input
           type="password"
           formControlName="confirmPassword"
+          autocomplete="new-password"
+          placeholder="Repeat your password"
           class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
         />
 
@@ -51,12 +60,12 @@
         <app-error-message [message]="serverError()" />
       }
 
-      <app-button type="submit" [loading]="loading()"> Create Account </app-button>
+      <app-button type="submit" [loading]="loading()">Create Account</app-button>
 
-      <div class="text-center text-sm">
+      <p class="text-center text-sm text-slate-600">
         Already have an account?
-        <a routerLink="/login" class="text-blue-600 hover:underline">Login</a>
-      </div>
+        <a routerLink="/login" class="font-medium text-slate-950 hover:underline"> Login </a>
+      </p>
     </form>
   </app-card>
 </div>
