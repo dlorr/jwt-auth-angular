@@ -5,7 +5,6 @@ import { catchError, switchMap, throwError } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 import { AuthStateService } from '../services/auth-state.service';
-
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const authState = inject(AuthStateService);
@@ -18,11 +17,19 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(requestWithCredentials).pipe(
     catchError((error: HttpErrorResponse) => {
       const isUnauthorized = error.status === 401;
+
       const isRefreshRequest = req.url.includes('/auth/refresh');
       const isLoginRequest = req.url.includes('/auth/login');
       const isRegisterRequest = req.url.includes('/auth/register');
+      const isCurrentUserRequest = req.url.endsWith('/user');
 
-      if (!isUnauthorized || isRefreshRequest || isLoginRequest || isRegisterRequest) {
+      if (
+        !isUnauthorized ||
+        isRefreshRequest ||
+        isLoginRequest ||
+        isRegisterRequest ||
+        isCurrentUserRequest
+      ) {
         return throwError(() => error);
       }
 
