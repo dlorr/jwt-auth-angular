@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { AuthService } from '../../../../core/services/auth.service';
 import { Session } from '../../../../core/models/session.model';
@@ -8,7 +9,7 @@ import { ApiError } from '../../../../core/models/api.model';
 
 @Component({
   selector: 'app-sessions',
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe],
   templateUrl: './sessions.html',
   styleUrl: './sessions.css',
 })

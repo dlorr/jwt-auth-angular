@@ -1,60 +1,78 @@
-<div class="min-h-screen bg-slate-100 p-6">
-  <div class="mx-auto max-w-4xl rounded-xl bg-white p-6 shadow-sm">
-    <div class="mb-6 flex items-center justify-between">
-      <div>
-        <h1 class="text-2xl font-bold">Sessions</h1>
-        <p class="text-sm text-gray-600">Manage active login sessions.</p>
-      </div>
-
-      <a routerLink="/dashboard" class="text-sm text-blue-600 hover:underline">
-        Back to Dashboard
-      </a>
+<div class="space-y-6">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-slate-950">Sessions</h1>
+      <p class="mt-2 text-sm text-slate-600">Review and manage your active login sessions.</p>
     </div>
 
-    @if (loading()) {
-      <p class="text-sm text-gray-600">Loading sessions...</p>
-    }
+    <a
+      routerLink="/dashboard"
+      class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+    >
+      Back
+    </a>
+  </div>
 
-    @if (errorMessage()) {
-      <p class="text-sm text-red-600">{{ errorMessage() }}</p>
-    }
+  @if (loading()) {
+    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm text-slate-600">Loading sessions...</p>
+    </div>
+  }
 
-    @if (successMessage()) {
-      <p class="text-sm text-green-600">{{ successMessage() }}</p>
-    }
+  @if (errorMessage()) {
+    <div class="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+      {{ errorMessage() }}
+    </div>
+  }
 
-    <div class="mt-4 space-y-3">
-      @for (session of sessions(); track session._id) {
-        <div class="rounded-lg border border-gray-200 p-4">
-          <div class="flex items-center justify-between gap-4">
-            <div>
-              <p class="font-medium">
+  @if (successMessage()) {
+    <div class="rounded-2xl border border-green-200 bg-green-50 p-4 text-sm text-green-700">
+      {{ successMessage() }}
+    </div>
+  }
+
+  <div class="grid gap-4">
+    @for (session of sessions(); track session._id) {
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="font-semibold text-slate-950">
                 {{ session.userAgent || 'Unknown device' }}
-              </p>
-
-              <p class="text-sm text-gray-600">Created: {{ session.createdAt }}</p>
+              </h2>
 
               @if (session.isCurrent) {
-                <p class="mt-1 text-sm font-medium text-green-600">Current session</p>
+                <span
+                  class="rounded-full bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700"
+                >
+                  Current
+                </span>
               }
             </div>
 
-            @if (!session.isCurrent) {
-              <button
-                type="button"
-                (click)="deleteSession(session._id)"
-                class="rounded-lg border border-red-200 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
-              >
-                Revoke
-              </button>
-            }
+            <p class="mt-1 text-sm text-slate-500">
+              Created: {{ session.createdAt | date: 'medium' }}
+            </p>
           </div>
+
+          @if (!session.isCurrent) {
+            <button
+              type="button"
+              (click)="deleteSession(session._id)"
+              class="rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+            >
+              Revoke
+            </button>
+          }
         </div>
-      } @empty {
-        @if (!loading()) {
-          <p class="text-sm text-gray-600">No active sessions found.</p>
-        }
+      </div>
+    } @empty {
+      @if (!loading()) {
+        <div class="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+          <h2 class="font-semibold text-slate-950">No active sessions</h2>
+          <p class="mt-2 text-sm text-slate-600">You do not have any active sessions yet.</p>
+        </div>
       }
-    </div>
+    }
   </div>
 </div>
