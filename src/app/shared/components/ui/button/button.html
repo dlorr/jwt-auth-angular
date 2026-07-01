@@ -1,7 +1,7 @@
 <button
   [type]="type()"
   [disabled]="disabled() || loading()"
-  class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+  class="btn-primary flex items-center justify-center gap-2"
 >
   @if (loading()) {
     <app-spinner />

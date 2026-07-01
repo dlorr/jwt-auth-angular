@@ -1,20 +1,27 @@
-<div class="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
-  <app-card class="w-full max-w-md">
-    <div class="mb-6 text-center">
-      <h1 class="text-2xl font-bold tracking-tight text-slate-950">Create account</h1>
-      <p class="mt-2 text-sm text-slate-600">Start your secure session-based auth experience.</p>
+<div
+  class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-10"
+>
+  <div class="auth-glow left-20 top-24 bg-primary"></div>
+  <div class="auth-glow bottom-20 right-20 bg-secondary"></div>
+
+  <app-card class="page-enter">
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold text-foreground">Create account</h1>
+      <p class="mt-2 text-sm text-muted-foreground">
+        Register your account to start using the app.
+      </p>
     </div>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
-      <div>
-        <label class="mb-1.5 block text-sm font-medium text-slate-700">Email</label>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">
+      <div class="form-group">
+        <label class="field-label">Email</label>
 
         <input
           type="email"
           formControlName="email"
           autocomplete="email"
           placeholder="you@example.com"
-          class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          class="field-input"
         />
 
         @if ((form.controls.email.touched || submitted) && form.controls.email.errors) {
@@ -22,15 +29,15 @@
         }
       </div>
 
-      <div>
-        <label class="mb-1.5 block text-sm font-medium text-slate-700">Password</label>
+      <div class="form-group">
+        <label class="field-label">Password</label>
 
         <input
           type="password"
           formControlName="password"
           autocomplete="new-password"
           placeholder="Create a strong password"
-          class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          class="field-input"
         />
 
         @if ((form.controls.password.touched || submitted) && form.controls.password.errors) {
@@ -38,15 +45,15 @@
         }
       </div>
 
-      <div>
-        <label class="mb-1.5 block text-sm font-medium text-slate-700"> Confirm Password </label>
+      <div class="form-group">
+        <label class="field-label">Confirm Password</label>
 
         <input
           type="password"
           formControlName="confirmPassword"
           autocomplete="new-password"
           placeholder="Repeat your password"
-          class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          class="field-input"
         />
 
         @if (
@@ -57,14 +64,16 @@
       </div>
 
       @if (serverError()) {
-        <app-error-message [message]="serverError()" />
+        <div class="alert-error">
+          {{ serverError() }}
+        </div>
       }
 
-      <app-button type="submit" [loading]="loading()">Create Account</app-button>
+      <app-button type="submit" [loading]="loading()"> Create Account </app-button>
 
-      <p class="text-center text-sm text-slate-600">
+      <p class="text-center text-sm text-muted-foreground">
         Already have an account?
-        <a routerLink="/login" class="font-medium text-slate-950 hover:underline"> Login </a>
+        <a routerLink="/login" class="font-medium text-primary hover:underline"> Login </a>
       </p>
     </form>
   </app-card>
