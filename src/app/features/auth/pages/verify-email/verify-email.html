@@ -1,29 +1,48 @@
-<div class="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
-  <app-card class="w-full max-w-md">
-    <h1 class="text-2xl font-bold mb-4">Email Verification</h1>
+<div
+  class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-10"
+>
+  <div class="auth-glow left-20 top-24 bg-primary"></div>
+  <div class="auth-glow bottom-20 right-20 bg-secondary"></div>
 
-    @if (loading()) {
-      <div class="flex justify-center">
-        <app-spinner />
-      </div>
-    }
+  <app-card class="page-enter">
+    <div class="text-center">
+      @if (loading()) {
+        <div class="flex justify-center">
+          <app-spinner />
+        </div>
 
-    @if (successMessage()) {
-      <p class="text-sm text-green-600">
-        {{ successMessage() }}
-      </p>
+        <h1 class="mt-6 text-3xl font-bold text-foreground">Verifying Email</h1>
 
-      <a routerLink="/login" class="mt-4 inline-block text-blue-600 hover:underline">
-        Go to Login
-      </a>
-    }
+        <p class="mt-2 text-sm text-muted-foreground">
+          Please wait while we verify your account...
+        </p>
+      }
 
-    @if (serverError()) {
-      <app-error-message [message]="serverError()" />
+      @if (successMessage()) {
+        <div class="mb-6 text-6xl">✅</div>
 
-      <a routerLink="/login" class="mt-4 inline-block text-blue-600 hover:underline">
-        Back to Login
-      </a>
-    }
+        <h1 class="text-3xl font-bold text-foreground">Email Verified</h1>
+
+        <p class="mt-3 text-muted-foreground">
+          {{ successMessage() }}
+        </p>
+
+        <a routerLink="/login" class="btn-primary mt-8 inline-flex w-auto px-8">
+          Continue to Login
+        </a>
+      }
+
+      @if (serverError()) {
+        <div class="mb-6 text-6xl">❌</div>
+
+        <h1 class="text-3xl font-bold text-foreground">Verification Failed</h1>
+
+        <div class="alert-error mt-6">
+          {{ serverError() }}
+        </div>
+
+        <a routerLink="/login" class="btn-ghost mt-6 inline-flex w-auto px-8"> Back to Login </a>
+      }
+    </div>
   </app-card>
 </div>
