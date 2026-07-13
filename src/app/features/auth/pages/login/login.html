@@ -30,13 +30,23 @@
       <div class="form-group">
         <label class="field-label">Password</label>
 
-        <input
-          type="password"
-          formControlName="password"
-          autocomplete="current-password"
-          placeholder="Enter your password"
-          class="field-input"
-        />
+        <div class="relative">
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="current-password"
+            placeholder="Enter your password"
+            class="field-input pr-16"
+          />
+
+          <button
+            type="button"
+            (click)="showPassword.set(!showPassword())"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {{ showPassword() ? 'Hide' : 'Show' }}
+          </button>
+        </div>
 
         @if ((form.controls.password.touched || submitted) && form.controls.password.errors) {
           <app-error-message [message]="'Password is required.'" />

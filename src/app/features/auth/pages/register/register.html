@@ -32,13 +32,23 @@
       <div class="form-group">
         <label class="field-label">Password</label>
 
-        <input
-          type="password"
-          formControlName="password"
-          autocomplete="new-password"
-          placeholder="Create a strong password"
-          class="field-input"
-        />
+        <div class="relative">
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="new-password"
+            placeholder="Create a strong password"
+            class="field-input pr-16"
+          />
+
+          <button
+            type="button"
+            (click)="showPassword.set(!showPassword())"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {{ showPassword() ? 'Hide' : 'Show' }}
+          </button>
+        </div>
 
         @if ((form.controls.password.touched || submitted) && form.controls.password.errors) {
           <app-error-message [message]="getErrorMessage(form.controls.password)" />
@@ -48,13 +58,23 @@
       <div class="form-group">
         <label class="field-label">Confirm Password</label>
 
-        <input
-          type="password"
-          formControlName="confirmPassword"
-          autocomplete="new-password"
-          placeholder="Repeat your password"
-          class="field-input"
-        />
+        <div class="relative">
+          <input
+            [type]="showConfirmPassword() ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            autocomplete="new-password"
+            placeholder="Repeat your password"
+            class="field-input pr-16"
+          />
+
+          <button
+            type="button"
+            (click)="showConfirmPassword.set(!showConfirmPassword())"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {{ showConfirmPassword() ? 'Hide' : 'Show' }}
+          </button>
+        </div>
 
         @if (
           (form.controls.confirmPassword.touched || submitted) && form.hasError('passwordMismatch')

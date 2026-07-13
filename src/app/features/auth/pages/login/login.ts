@@ -29,6 +29,7 @@ export class Login {
   submitted = false;
   loading = signal(false);
   serverError = signal('');
+  showPassword = signal(false);
   getErrorMessage = getFormErrorMessage;
 
   form = this.fb.nonNullable.group({

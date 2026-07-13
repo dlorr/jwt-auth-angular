@@ -31,6 +31,8 @@ export class Register {
   submitted = false;
   loading = signal(false);
   serverError = signal('');
+  showPassword = signal(false);
+  showConfirmPassword = signal(false);
   getErrorMessage = getFormErrorMessage;
 
   form = this.fb.nonNullable.group(
