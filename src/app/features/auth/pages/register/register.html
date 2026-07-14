@@ -44,9 +44,13 @@
           <button
             type="button"
             (click)="showPassword.set(!showPassword())"
-            class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
           >
-            {{ showPassword() ? 'Hide' : 'Show' }}
+            @if (showPassword()) {
+              <svg lucideEyeOff class="h-5 w-5"></svg>
+            } @else {
+              <svg lucideEye class="h-5 w-5"></svg>
+            }
           </button>
         </div>
 
@@ -70,9 +74,13 @@
           <button
             type="button"
             (click)="showConfirmPassword.set(!showConfirmPassword())"
-            class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
           >
-            {{ showConfirmPassword() ? 'Hide' : 'Show' }}
+            @if (showConfirmPassword()) {
+              <svg lucideEyeOff class="h-5 w-5"></svg>
+            } @else {
+              <svg lucideEye class="h-5 w-5"></svg>
+            }
           </button>
         </div>
 

@@ -16,9 +16,11 @@ import { passwordValidator } from '../../../../shared/validators/password.valida
 import { confirmPasswordValidator } from '../../../../shared/validators/confirm-password.validator';
 import { getFormErrorMessage } from '../../../../shared/utils/form-error.util';
 
+import { LucideEye, LucideEyeOff } from '@lucide/angular';
+
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, RouterLink, Card, Button, ErrorMessage],
+  imports: [ReactiveFormsModule, RouterLink, Card, Button, ErrorMessage, LucideEye, LucideEyeOff],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })

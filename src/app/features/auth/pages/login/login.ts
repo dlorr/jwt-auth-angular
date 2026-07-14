@@ -14,9 +14,11 @@ import { ErrorMessage } from '../../../../shared/components/feedback/error-messa
 import { emailValidator } from '../../../../shared/validators/email.validator';
 import { getFormErrorMessage } from '../../../../shared/utils/form-error.util';
 
+import { LucideEye, LucideEyeOff } from '@lucide/angular';
+
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink, Card, Button, ErrorMessage],
+  imports: [ReactiveFormsModule, RouterLink, Card, Button, ErrorMessage, LucideEye, LucideEyeOff],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
