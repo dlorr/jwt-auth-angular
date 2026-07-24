@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -47,6 +47,18 @@ export class Register {
       validators: [confirmPasswordValidator('password', 'confirmPassword')],
     },
   );
+
+  getInputClass(control: AbstractControl) {
+    if (!control.touched) {
+      return 'field-input';
+    }
+
+    if (control === this.form.controls.confirmPassword && this.form.hasError('passwordMismatch')) {
+      return 'field-input field-input-error';
+    }
+
+    return control.invalid ? 'field-input field-input-error' : 'field-input field-input-success';
+  }
 
   onSubmit() {
     this.submitted = true;

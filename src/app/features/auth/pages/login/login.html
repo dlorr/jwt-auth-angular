@@ -19,7 +19,7 @@
           formControlName="email"
           autocomplete="email"
           placeholder="you@example.com"
-          class="field-input"
+          [class]="getInputClass(form.controls.email)"
         />
 
         @if ((form.controls.email.touched || submitted) && form.controls.email.errors) {
@@ -36,7 +36,7 @@
             formControlName="password"
             autocomplete="current-password"
             placeholder="Enter your password"
-            class="field-input pr-16"
+            [class]="getInputClass(form.controls.password)"
           />
 
           <button

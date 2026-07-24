@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -38,6 +38,14 @@ export class Login {
     email: ['', [emailValidator]],
     password: ['', [Validators.required]],
   });
+
+  getInputClass(control: AbstractControl) {
+    if (!control.touched) {
+      return 'field-input';
+    }
+
+    return control.invalid ? 'field-input field-input-error' : 'field-input field-input-success';
+  }
 
   onSubmit() {
     this.submitted = true;

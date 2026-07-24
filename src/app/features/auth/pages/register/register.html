@@ -38,7 +38,7 @@
             formControlName="password"
             autocomplete="new-password"
             placeholder="Create a strong password"
-            class="field-input pr-16"
+            [class]="getInputClass(form.controls.password)"
           />
 
           <button
@@ -68,7 +68,7 @@
             formControlName="confirmPassword"
             autocomplete="new-password"
             placeholder="Repeat your password"
-            class="field-input pr-16"
+            [class]="getInputClass(form.controls.confirmPassword)"
           />
 
           <button
