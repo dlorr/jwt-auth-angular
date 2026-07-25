@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -16,6 +17,11 @@ import { passwordValidator } from '../../../../shared/validators/password.valida
 import { confirmPasswordValidator } from '../../../../shared/validators/confirm-password.validator';
 import { getFormErrorMessage } from '../../../../shared/utils/form-error.util';
 
+import {
+  getPasswordStrength,
+  PasswordStrength,
+} from '../../../../shared/utils/password-strength.util';
+
 import { LucideEye, LucideEyeOff } from '@lucide/angular';
 
 @Component({
@@ -29,6 +35,7 @@ export class Register {
   private authService = inject(AuthService);
   private authState = inject(AuthStateService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   submitted = false;
   loading = signal(false);
@@ -36,6 +43,7 @@ export class Register {
   showPassword = signal(false);
   showConfirmPassword = signal(false);
   getErrorMessage = getFormErrorMessage;
+  passwordStrength = signal<PasswordStrength>(getPasswordStrength(''));
 
   form = this.fb.nonNullable.group(
     {
@@ -47,6 +55,14 @@ export class Register {
       validators: [confirmPasswordValidator('password', 'confirmPassword')],
     },
   );
+
+  constructor() {
+    this.form.controls.password.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((password) => {
+        this.passwordStrength.set(getPasswordStrength(password ?? ''));
+      });
+  }
 
   getInputClass(control: AbstractControl) {
     if (!control.touched) {
